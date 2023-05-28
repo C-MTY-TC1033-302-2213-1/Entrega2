@@ -1,62 +1,101 @@
+
+# Aprendizajes:
 # Clases Base - Video
-# Clase composición - Episodio
 # Clases Derivadas - Pelicula, Serie (con composicion)
+# Poliformismo utilizando 1 método virtual str()
+# Arreglos de apuntadores
 
 <img alt="points bar" align="right" height="36" src="../../blob/status/.github/activity-icons/points-bar.svg" />
 
-
 ```c++
-//
+
+/
 //  main.cpp
 //  Tarea2
 //
-//  Created by Ma. Guadalupe Roque Díaz de León on 19/05/23.
+//  Created by Ma. Guadalupe Roque Díaz de León on 28/05/23.
 //
 
 #include <iostream>
 #include "Video.h"
+#include "Poliformismo.hpp"
 #include "Episodio.h"
 #include "Pelicula.h"
 #include "Serie.h"
-int main() {
-    // Declaracion de objetos
-    Video viernes;
-    Episodio episodio_viernes{"Tigres_Rayados", 132, 100};
-    Episodio episodio_sabado{"Tigres_Campeones", 132, 100};
-    Pelicula peli;
-    Serie serie1;
+
+void poliformismo(Poliformismo inventario){
     int opcion;
-
-    serie1.setNombre("Chihuahua");
-    serie1.setDuracion(200);
-    serie1.setGenero("Comedia");
-    serie1.setCalificacion(9.5);
-    serie1.agregaEpisodio(episodio_viernes);
-    serie1.agregaEpisodio(episodio_sabado);
-
+    double calificacion;
+    string genero;
     cin >> opcion;
 
-    switch (opcion){
+    switch (opcion) {
         case 1:
-            cout << serie1.getGenero() << endl;
-            cout << serie1.getDuracion() << endl;
+            cin >> calificacion;
+            inventario.reporteCalificacion(calificacion);
             break;
+
         case 2:
-            cout << serie1.getCalificacion() << endl;
-            cout << serie1.getEpisodio(0).str() << endl;
-            cout << serie1.getEpisodio(1).str() << endl;
+            cin >> genero;
+            inventario.reporteGenero(genero);
             break;
+
         case 3:
-            cout << serie1.str() << endl;
+            inventario.reporteInventario();
             break;
-        case 4:
-            cout << "Video = " << viernes.str() << endl;
-            cout << "Episodio = " << episodio_viernes.str() << endl;
-            cout << "Pelicula = " << peli.str() << endl;
-            break;
+
         default:
-            cout << "incorrecta" ;
+            cout << "Error\n";
+            break;
     }
+}
+int main() {    
+        // Declaracion de objetos
+        Video viernes;
+        Pelicula pel;
+        Serie serie2;
+        Poliformismo neflix;
+
+        Episodio episodio_viernes{"Tigres_Rayados", 90, 100};
+        Episodio episodio_sabado{"Tigres_Campeones", 90, 100};
+        Pelicula peli{"0001", "Tigres_Chivas", 600, "Deportes", 100.0, 20};
+        Serie serie1{"0002", "POO", 500, "Programacion", 100};
+
+        int opcion;
+
+        // Añadir episodios a la serie1
+        serie1.agregaEpisodio(episodio_viernes);
+        serie1.agregaEpisodio(episodio_sabado);
+
+        // leer la opcion
+        cin >> opcion;
+
+        switch (opcion){
+            case 1:
+                cout << serie1.getGenero() << endl;
+                cout << serie1.getDuracion() << endl;
+                cout << serie1.getCalificacion() << endl;
+                cout << serie1.getEpisodio(0).str() << endl;
+                cout << serie1.getEpisodio(1).str() << endl;
+                cout << serie1.str() << endl;
+                break;
+            case 2:
+              cout << "CDV=" << viernes.str() << endl;
+              cout << "CDP=" << pel.str() << endl;
+              cout << "CDS=" << serie2.str() << endl;
+                break;
+            case 3:
+               neflix.leerArchivo("Inventario1.csv");
+               poliformismo(neflix);
+               break;
+        case 4:
+              neflix.leerArchivo("Inventario2.csv.csv");
+              poliformismo(neflix);
+              break;
+        default:
+              cout << "incorrecta" ;
+        }
+
 
     return 0;
 }
@@ -71,33 +110,73 @@ Datos de entrada:
 1
 
 Datos de salida:
-Comedia
-200
+Programacion\n
+500\n
+100\n
+Tigres_Rayados 90 100\n
+Tigres_Campeones 90 100\n
+0002 POO 500 Programacion 100.000000 2\n
+Tigres_Rayados 90 100\n
+Tigres_Campeones 90 100\n
+
 
 Datos de entrada:
 2
 
 Datos de salida:
-9.5
-Tigres_Rayados 132 100
-Tigres_Campeones 132 100
+CDV=0000 TC1030 10 Computación 100.000000\n
+CDP=0000 TC1030 10 Computación 100.000000 100\n
+CDS=0000 TC1030 10 Computación 100.000000 0\n
 
 Datos de entrada:
 3
+1
+100
 
 Datos de salida:
-0000 Chihuahua 200 Comedia 9.500000 2
-Tigres_Rayados 132 100
-Tigres_Campeones 132 100
+0 100 P1 100 A 100.000000 1\n
+1 101 P2 200 A 100.000000 2\n
+2 102 P3 100 A 95.000000 3\n
+3 103 P4 200 P 99.000000 4\n
+4 104 P5 100 P 110.000000 5\n
+5 105 P6 200 P 120.000000 6\n
+6 106 P7 200 A 100.000000 7\n
+7 107 P8 200 A 100.000000 8\n
+8 108 P9 200 A 95.000000 9\n
+9 109 P10 200 P 150.000000 10\n
+10 110 P11 200 P 110.000000 11\n
+11 111 P12 100 P 120.000000 12\n
+100 P1 100 A 100.000000 1\n
+101 P2 200 A 100.000000 2\n
+106 P7 200 A 100.000000 7\n
+107 P8 200 A 100.000000 8\n
+total = 4\n
 
 Datos de entrada:
-4
-
+3
+2
+A
 Datos de salida:
-Video = 0000 TC1030 10 Computación 100.000000
-Episodio = Tigres_Rayados 132 100
-Pelicula = 0000 TC1030 10 Computación 100.000000 100
+0 100 P1 100 A 100.000000 1
+1 101 P2 200 A 100.000000 2
+2 102 P3 100 A 95.000000 3
+3 103 P4 200 P 99.000000 4
+4 104 P5 100 P 110.000000 5
+5 105 P6 200 P 120.000000 6
+6 106 P7 200 A 100.000000 7
+7 107 P8 200 A 100.000000 8
+8 108 P9 200 A 95.000000 9
+9 109 P10 200 P 150.000000 10
+10 110 P11 200 P 110.000000 11
+11 111 P12 100 P 120.000000 12
 
+100 P1 100 A 100.000000 1
+101 P2 200 A 100.000000 2
+102 P3 100 A 95.000000 3
+106 P7 200 A 100.000000 7
+107 P8 200 A 100.000000 8
+108 P9 200 A 95.000000 9
+total = 6
 ```
 
 2. Push your changes back to your assignment GitHub repo. Remember to try to make your commits atomic and your commit messages descriptive.
