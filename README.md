@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include "Video.h"
-#include "Poliformismo.hpp"
+#include "Poliformismo.h"
 #include "Episodio.h"
 #include "Pelicula.h"
 #include "Serie.h"
@@ -49,6 +49,7 @@ void poliformismo(Poliformismo inventario){
             break;
     }
 }
+
 int main() {    
         // Declaracion de objetos
         Video viernes;
@@ -79,19 +80,23 @@ int main() {
                 cout << serie1.getEpisodio(1).str() << endl;
                 cout << serie1.str() << endl;
                 break;
+
             case 2:
               cout << "CDV=" << viernes.str() << endl;
               cout << "CDP=" << pel.str() << endl;
               cout << "CDS=" << serie2.str() << endl;
                 break;
+
             case 3:
                neflix.leerArchivo("Inventario1.csv");
                poliformismo(neflix);
                break;
+
         case 4:
               neflix.leerArchivo("Inventario2.csv.csv");
               poliformismo(neflix);
               break;
+
         default:
               cout << "incorrecta" ;
         }
@@ -106,52 +111,55 @@ int main() {
 ```c++
 /* Casos de Prueba
 //  
+# 1
 Datos de entrada:
 1
 
 Datos de salida:
-Programacion\n
-500\n
-100\n
-Tigres_Rayados 90 100\n
-Tigres_Campeones 90 100\n
-0002 POO 500 Programacion 100.000000 2\n
-Tigres_Rayados 90 100\n
-Tigres_Campeones 90 100\n
+Programacion
+500
+100
+Tigres_Rayados 90 100
+Tigres_Campeones 90 100
+0002 POO 500 Programacion 100.000000 2
+Tigres_Rayados 90 100
+Tigres_Campeones 90 100
 
-
+# 2
 Datos de entrada:
 2
 
 Datos de salida:
-CDV=0000 TC1030 10 Computación 100.000000\n
-CDP=0000 TC1030 10 Computación 100.000000 100\n
-CDS=0000 TC1030 10 Computación 100.000000 0\n
+CDV=0000 TC1030 10 Computación 100.000000
+CDP=0000 TC1030 10 Computación 100.000000 100
+CDS=0000 TC1030 10 Computación 100.000000 0
 
+# 3
 Datos de entrada:
 3
 1
 100
 
 Datos de salida:
-0 100 P1 100 A 100.000000 1\n
-1 101 P2 200 A 100.000000 2\n
-2 102 P3 100 A 95.000000 3\n
-3 103 P4 200 P 99.000000 4\n
-4 104 P5 100 P 110.000000 5\n
-5 105 P6 200 P 120.000000 6\n
-6 106 P7 200 A 100.000000 7\n
-7 107 P8 200 A 100.000000 8\n
-8 108 P9 200 A 95.000000 9\n
-9 109 P10 200 P 150.000000 10\n
-10 110 P11 200 P 110.000000 11\n
-11 111 P12 100 P 120.000000 12\n
-100 P1 100 A 100.000000 1\n
-101 P2 200 A 100.000000 2\n
-106 P7 200 A 100.000000 7\n
-107 P8 200 A 100.000000 8\n
-total = 4\n
+0 100 P1 100 A 100.000000 1
+1 101 P2 200 A 100.000000 2
+2 102 P3 100 A 95.000000 3
+3 103 P4 200 P 99.000000 4
+4 104 P5 100 P 110.000000 5
+5 105 P6 200 P 120.000000 6
+6 106 P7 200 A 100.000000 7
+7 107 P8 200 A 100.000000 8
+8 108 P9 200 A 95.000000 9
+9 109 P10 200 P 150.000000 10
+10 110 P11 200 P 110.000000 11
+11 111 P12 100 P 120.000000 12
+100 P1 100 A 100.000000 1
+101 P2 200 A 100.000000 2
+106 P7 200 A 100.000000 7
+107 P8 200 A 100.000000 8
+total = 4
 
+# 4
 Datos de entrada:
 3
 2
@@ -169,7 +177,6 @@ Datos de salida:
 9 109 P10 200 P 150.000000 10
 10 110 P11 200 P 110.000000 11
 11 111 P12 100 P 120.000000 12
-
 100 P1 100 A 100.000000 1
 101 P2 200 A 100.000000 2
 102 P3 100 A 95.000000 3
@@ -177,6 +184,41 @@ Datos de salida:
 107 P8 200 A 100.000000 8
 108 P9 200 A 95.000000 9
 total = 6
+
+
+# 5
+Datos de entrada:
+3
+3
+
+Datos de salida:
+0 100 P1 100 A 100.000000 1
+1 101 P2 200 A 100.000000 2
+2 102 P3 100 A 95.000000 3
+3 103 P4 200 P 99.000000 4
+4 104 P5 100 P 110.000000 5
+5 105 P6 200 P 120.000000 6
+6 106 P7 200 A 100.000000 7
+7 107 P8 200 A 100.000000 8
+8 108 P9 200 A 95.000000 9
+9 109 P10 200 P 150.000000 10
+10 110 P11 200 P 110.000000 11
+11 111 P12 100 P 120.000000 12
+100 P1 100 A 100.000000 1
+101 P2 200 A 100.000000 2
+102 P3 100 A 95.000000 3
+103 P4 200 P 99.000000 4
+104 P5 100 P 110.000000 5
+105 P6 200 P 120.000000 6
+106 P7 200 A 100.000000 7
+107 P8 200 A 100.000000 8
+108 P9 200 A 95.000000 9
+109 P10 200 P 150.000000 10
+110 P11 200 P 110.000000 11
+111 P12 100 P 120.000000 12
+Peliculas = 12
+Series = 0
+
 ```
 
 2. Push your changes back to your assignment GitHub repo. Remember to try to make your commits atomic and your commit messages descriptive.
