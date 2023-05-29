@@ -1,44 +1,103 @@
-{
-  "tests": [
-    {
-     "name": "Test 1 - Datos de entrada: 1",
-     "setup": "g++ -g -o main main.cpp Video.cpp Serie.cpp Pelicula.cpp Episodio.cpp Poliformismo.cpp",
-     "run": "./main",
-     "input": "1",
-     "output": "Programacion\n500\n100\nTigres_Rayados 90 100\nTigres_Campeones 90 100\n0002 POO 500 Programacion 100.000000 2\nTigres_Rayados 90 100\nTigres_Campeones 90 100\n",
-     "comparison": "included",
-     "timeout": 2,
-     "points": 25
-   },
-   {
-     "name": "Test 2 - - Datos de entrada: 2",
-     "setup": "g++ -g -o main main.cpp Video.cpp Serie.cpp Pelicula.cpp Episodio.cpp Poliformismo.cpp",
-     "run": "./main",
-     "input": "2",
-     "output": "CDV=0000 TC1030 10 Computación 100.000000\nCDP=0000 TC1030 10 Computación 100.000000 100\nCDS=0000 TC1030 10 Computación 100.000000 0\n",
-     "comparison": "included",
-     "timeout": 2,
-     "points": 25
-   },
-   {
-     "name": "Test 3 - datos de entrada: 3   1   100 ",
-     "setup": "g++ -g -o main main.cpp Video.cpp Serie.cpp Pelicula.cpp Episodio.cpp Poliformismo.cpp",
-     "run": "./main",
-     "input": "3 1 100",
-     "output": "0 100 P1 100 A 100.000000 1\n1 101 P2 200 A 100.000000 2\n2 102 P3 100 A 95.000000 3\n3 103 P4 200 P 99.000000 4\n4 104 P5 100 P 110.000000 5\n5 105 P6 200 P 120.000000 6\n6 106 P7 200 A 100.000000 7\n7 107 P8 200 A 100.000000 8\n8 108 P9 200 A 95.000000 9\n9 109 P10 200 P 150.000000 10\n100 P1 100 A 100.000000 1\n101 P2 200 A 100.000000 2\n106 P7 200 A 100.000000 7\n107 P8 200 A 100.000000 8\ntotal = 4\n",
-     "comparison": "included",
-     "timeout": 2,
-     "points": 25
-   },
- {
-     "name": "Test 4 -datos de entrada: 3   2   A",
-     "setup": "g++ -g -o main main.cpp Video.cpp Serie.cpp Pelicula.cpp Episodio.cpp Poliformismo.cpp",
-     "run": "./main",
-     "input": "3 2 A",
-     "output": "0 100 P1 100 A 100.000000 1\n1 101 P2 200 A 100.000000 2\n2 102 P3 100 A 95.000000 3\n3 103 P4 200 P 99.000000 4\n4 104 P5 100 P 110.000000 5\n5 105 P6 200 P 120.000000 6\n6 106 P7 200 A 100.000000 7\n7 107 P8 200 A 100.000000 8\n8 108 P9 200 A 95.000000 9\n9 109 P10 200 P 150.000000 10\n100 P1 100 A 100.000000 1\n101 P2 200 A 100.000000 2\n102 P3 100 A 95.000000 3\n106 P7 200 A 100.000000 7\n107 P8 200 A 100.000000 8\n108 P9 200 A 95.000000 9\ntotal = 6\n",
-      "comparison": "included",
-   "timeout": 2,
-     "points": 25
-   }
-  ]
+//
+//  main.cpp
+//  Tarea3 y Actividad Presencial 29/05/23
+//
+//  Created by Ma. Guadalupe Roque Díaz de León on 28/05/23.
+//
+
+// Clases Base - Video - con método virtual para Poliformismo
+// Clases Derivadas - Pelicula, Serie
+// Clase usada para composición - Episodio
+// Arreglos de apuntadores
+
+#include <iostream>
+#include "Video.h"
+#include "Episodio.h"
+#include "Pelicula.h"
+#include "Serie.h"
+#include "Poliformismo.h"
+
+void poliformismo(Poliformismo inventario){
+    int opcion;
+    double calificacion;
+    string genero;
+
+    // leer la opcion
+    cin >> opcion;
+
+    switch (opcion) {
+        case 1:
+            cin >> calificacion;
+            inventario.reporteCalificacion(calificacion);
+            break;
+
+        case 2:
+            cin >> genero;
+            inventario.reporteGenero(genero);
+            break;
+
+        case 3:
+            inventario.reporteInventario();
+            break;
+
+        default:
+            cout << "Error\n";
+            break;
+    }
+}
+
+
+int main() {
+    // Declaracion de objetos
+    Video viernes;
+    Pelicula pel;
+    Serie serie2;
+    Poliformismo neflix;
+
+    Episodio episodio_viernes{"Tigres_Rayados", 90, 100};
+    Episodio episodio_sabado{"Tigres_Campeones", 90, 100};
+    Pelicula peli{"0001", "Tigres_Chivas", 600, "Deportes", 100.0, 20};
+    Serie serie1{"0002", "POO", 500, "Programacion", 100};
+
+    int opcion;
+
+    // Añadir episodios a la serie1
+    serie1.agregaEpisodio(episodio_viernes);
+    serie1.agregaEpisodio(episodio_sabado);
+
+
+    // leer la opcion
+    cin >> opcion;
+
+    switch (opcion){
+        case 1:
+            cout << serie1.getGenero() << endl;
+            cout << serie1.getDuracion() << endl;
+            cout << serie1.getCalificacion() << endl;
+            cout << serie1.getEpisodio(0).str() << endl;
+            cout << serie1.getEpisodio(1).str() << endl;
+            cout << serie1.str() << endl;
+            break;
+
+        case 2:
+          cout << "CDV=" << viernes.str() << endl;
+          cout << "CDP=" << pel.str() << endl;
+          cout << "CDS=" << serie2.str() << endl;
+            break;
+
+        case 3:
+           neflix.leerArchivo("Inventario1.csv");
+           poliformismo(neflix);
+           break;
+
+        case 4:
+          neflix.leerArchivo("Inventario2.csv");
+          poliformismo(neflix);
+          break;
+
+    default:
+          cout << "incorrecta" ;
+    }
+
+    return 0;
 }
